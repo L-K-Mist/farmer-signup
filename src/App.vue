@@ -79,7 +79,7 @@
 <script>
 
 
-import { logout, initSession } from "@/session";
+import { logout, initSession, auth0 } from "@/session";
 
 export default {
   created() {
@@ -88,9 +88,10 @@ export default {
     initSession().then(() => {
       if (this.isLoggedIn) {
         console.log("I was called in app.vue after initSession resolved");
+        this.$store.dispatch("hasuraAuth");
       }
     }); //Initialize our session
-    this.$store.dispatch("prismaAuth");
+    
   },
   props: {
     source: String
@@ -138,8 +139,23 @@ export default {
     },
     testFunc() {
       console.log("​testFunc -> testFunc");
-      this.$store.dispatch('testHasura')
+      // this.$store.dispatch('testHasura')
+      auth0.checkSession({
+            // responseType: "token id_token"
+        }, function (err, authResult) {
+            console.log("​checkSession's authResult", authResult)
 
+            // if (err) {
+            //     store.dispatch("isLoggedIn", false)
+            //     // router.push("/login");
+            // }
+            // store.commit("update_auth_tokens", authResult);
+            // const tokenExpiryDate = addSeconds(new Date(), authResult.expiresIn);
+            // const tenMinutesBeforeExpiry = subtractMinutes(tokenExpiryDate, 10);
+            // const now = new Date();
+            // refreshTimeout = setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
+            resolve();
+        });
     }
   }
 };

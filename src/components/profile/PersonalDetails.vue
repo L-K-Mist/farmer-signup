@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import { PERSONALDETAILS_MUTATION } from "@/graphql/mutations";
 import { idDataExtraction } from '@/helpers/idDataExtraction'
 
 export default {

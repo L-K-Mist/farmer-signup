@@ -5,25 +5,14 @@ import {
 
 import gql from 'graphql-tag'
 import apollo from '@/apollo'
-
+import {
+    AUTHORIZE
+} from '@/gql/mutations.js'
 // https://hasura-auth-farmer.herokuapp.com/console/data/schema/public/tables/flowers/insert
 
-const AUTHORIZE = gql `
-    mutation authorize($email: String!, $authId: String!, $name: String!) {
-        authorize(email: $email, authId: $authId, name: $name) {
-            token
-            user{
-            id
-            name
-            publicEmail
-            publicName
-            bio
-            image
-            role
-            }
-        }
-    }
-`
+
+
+
 
 // Based on: https://itnext.io/managing-and-refreshing-auth0-tokens-in-a-vuejs-application-65eb29c309bc
 
@@ -121,12 +110,12 @@ const actions = {
         }
     },
 
-    async prismaAuth({
+    async hasuraAuth({
         state,
         commit
     }) {
         if (!state.isLoggedIn) {
-            console.log("Dee, you can't authorise prisma if user is not logged in")
+            console.log("Dee, you can't authorise hasura if user is not logged in")
             return
         }
         if (state.authUser) {
@@ -135,13 +124,13 @@ const actions = {
                     mutation: AUTHORIZE,
                     variables: {
                         email: state.authUser.email,
-                        name: state.authUser.name,
-                        authId: state.accessToken.split('.')[2]
+                        first_name: state.authUser.given_name,
+                        auth0_id: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
                     }
                 })
-                console.log('TCL: asyncauthorizeUser -> response', response.data.authorize.token);
-                console.log('TCL: asyncauthorizeUser -> response user', response.data.authorize.user);
-                commit('prismaToken', response.data.authorize.token)
+                // console.log('TCL: asyncauthorizeUser -> response', response.data.authorize.token);
+                console.log('TCL: HasuraauthorizeUser -> response user', response.data.insert_Users);
+                //commit('prismaToken', response.data.authorize.token)
                 return response
             } catch (err) {
                 console.log(err)
@@ -159,9 +148,8 @@ const actions = {
             if (authResult.accessToken && authResult.idToken) {
                 commit('update_auth_tokens', authResult)
                 commit('person', authResult.idTokenPayload)
-                dispatch('prismaAuth')
+                dispatch("hasuraAuth");
                 return authResult
-
             } else if (err) {
                 // this.logout()
                 reject(err)

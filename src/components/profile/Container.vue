@@ -1,6 +1,5 @@
 <template>
   <v-layout row justify-center>
-
     <v-flex v-if="name !== null" xs12 sm8 lg4 xl4>
       <!-- <template v-if="me.name !== ''">
         <div v-if="$apollo.loading">Loading...</div>
@@ -47,7 +46,6 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
 import PersonalDetails from "@/components/profile/PersonalDetails";
 import AddressDetails from "@/components/profile/Address";
 import FarmingActivities from "@/components/profile/FarmingActivities";
@@ -109,16 +107,6 @@ export default {
     }
   },
 
-  // apollo: {
-  //   me: gql`
-  //     query me {
-  //       me {
-  //         name
-  //         email
-  //       }
-  //     }
-  //   `
-  // },
   components: {
     PersonalDetails,
     AddressDetails,

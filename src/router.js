@@ -7,6 +7,7 @@ import Login from "@/views/Login.vue"
 import FarmProfile from './views/FarmProfile.vue';
 import CropCapture from './views/CropCapture.vue';
 import ProductCapture from './views/ProductCapture.vue';
+import ProfileForm from './views/ProfileForm.vue';
 
 Vue.use(Router)
 
@@ -21,6 +22,11 @@ const router = new Router({
       path: "/callback",
       name: "callback",
       component: Callback
+    },
+    {
+      path: "/profileForm",
+      name: "profileForm",
+      component: ProfileForm
     },
     {
       path: '/login',

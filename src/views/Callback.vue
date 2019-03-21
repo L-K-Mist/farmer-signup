@@ -24,12 +24,10 @@ export default {
       try {
         await this.$store.dispatch("parseTokens", hashValue);
         this.$store.commit("isLoggedIn", true);
-        // await this.$store.dispatch("prismaAuth");
         this.$router.push({ name: this.enRoute });
       } catch (e) {
         console.log("​}catch -> e", e);
         this.$store.commit("isLoggedIn", false);
-        // this.$router.push("/login");
       }
     }
   }
