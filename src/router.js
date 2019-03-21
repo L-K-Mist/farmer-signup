@@ -23,15 +23,19 @@ const router = new Router({
       name: "callback",
       component: Callback
     },
-    {
-      path: "/profileForm",
-      name: "profileForm",
-      component: ProfileForm
-    },
+
     {
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: ProfileForm,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/farm-profile',
@@ -40,7 +44,8 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }, {
+    },
+    {
       path: '/crop-capture',
       name: 'CropCapture',
       component: CropCapture,

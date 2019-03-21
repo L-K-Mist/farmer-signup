@@ -53,9 +53,11 @@ import { idDataExtraction } from '@/helpers/idDataExtraction'
 
 export default {
     mounted() {
-        if(this.$store.getters.personalDetails !== null) {
-            this.person = this.$store.getters.personalDetails
+        if(this.$store.getters.authUser !== null) {
+            this.person = this.$store.getters.authUser
         }
+
+		console.log('TCL: mounted -> this.person', this.person)
     },
     data: () => ({
         dialog: false,
@@ -89,21 +91,5 @@ export default {
         },
     }
 };
-// submit() {
-//   this.$apollo
-//     .mutate({
-//       mutation: PERSONALDETAILS_MUTATION,
-//       variables: {
-//         lastName: this.person.lastName,
-//         cellNo: this.person.cellNo,
-//         landLine: this.person.landLine,
-//         idSA: this.person.idSA
-//       }
-//     })
-//     .then(response => {
-//       console.log("​login -> response.data", response.data);
-//     })
-//     .catch(error => console.error(error));
-// }
 </script>
 

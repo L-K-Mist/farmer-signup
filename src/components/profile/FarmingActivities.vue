@@ -32,7 +32,6 @@
 </template>
 
 <script>
-// import { FARMINGACTIVITIES_MUTATION } from "@/graphql/mutations";
 export default {
   mounted() {
     if (this.$store.getters.farmingActivities !== null) {
@@ -60,11 +59,6 @@ export default {
       }
     };
   },
-  // computed: {
-  //   storedActivities() {
-  //     return this.$store.getters.farmingActivities
-  //   }
-  // },
   methods: {
     submit() {
       this.$store.dispatch("farmingActivities", this.farmingActivities);
@@ -72,37 +66,6 @@ export default {
       this.$store.dispatch("draftDone", true);
     }
   }
-  // watch: {
-  //   storedActivities(newVal){
-  //     if (newVal !== null) {
-  //       this.activities = newVal.category
-  //       this.longDescription = newVal.longDescription
-  //       this.crops = newVal.selling.crops
-  //       this.livestock = newVal.selling.livestock
-  //       this.products = newVal.selling.products
-  //     }
-  //   }
-  // }
-  // submit() {
-  //   this.$store.dispatch('farmingActivities', {
-  //         category: this.activities,
-  //         shortDescription: null,
-  //         longDescription: this.longDescription
-  //       })
-  //   this.$apollo
-  //     .mutate({
-  //       mutation: FARMINGACTIVITIES_MUTATION,
-  //       variables: {
-  //         category: this.activities,
-  //         shortDescription: null,
-  //         longDescription: this.longDescription
-  //       }
-  //     })
-  //     .then(response => {
-  //       console.log("​response.data", response.data);
-  //     })
-  //     .catch(error => console.error(error));
-  // }
 };
 </script>
 

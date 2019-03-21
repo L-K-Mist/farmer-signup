@@ -23,6 +23,7 @@ const state = {
     isHasuraAuth: null,
     isLoggedIn: false,
     authUser: null,
+    newRoute: null,
 }
 
 const getters = {
@@ -33,7 +34,8 @@ const getters = {
     isHasuraAuth: state => state.isHasuraAuth,
     prismaToken: state => state.prismaToken,
     authUser: state => state.authUser,
-    person: state => state.person
+    person: state => state.person,
+    newRoute: state => state.newRoute
 }
 
 const mutations = {
@@ -60,6 +62,9 @@ const mutations = {
     person(state, payload) {
         state.person = Object.assign(state.person, payload)
         console.log('TCL: person -> state.person', state.person);
+    },
+    newRoute(state, payload) {
+        state.newRoute = payload
     }
 }
 
