@@ -53,10 +53,13 @@ import { idDataExtraction } from '@/helpers/idDataExtraction'
 
 export default {
     mounted() {
-        if(this.$store.getters.authUser !== null) {
-            this.person = this.$store.getters.authUser
+        if(this.$store.getters.personalDetails){
+            this.person = this.$store.getters.personalDetails
+        } else if(this.$store.getters.authUser !== null) {
+            this.person.lastName = this.$store.getters.authUser.family_name
         }
 
+		console.log('TCL: mounted -> this.$store.state.authUser', this.$store.state.authUser)
 		console.log('TCL: mounted -> this.person', this.person)
     },
     data: () => ({
@@ -66,7 +69,7 @@ export default {
             lastName: null,
             cell: null,
             landLine: null,
-            idSA: null,
+            idSA: '',
         }
     }),
     computed: {
@@ -80,12 +83,12 @@ export default {
             this.dialog = true
         },
         submit() {
-            this.$store.dispatch('personalDetails', this.person)
+            this.$store.commit('personalDetails', this.person)
         }
     },
     watch: {
         idSA(newVal) {
-            if(newVal.length === 13) {
+            if(newVal && newVal.length === 13) {
                 this.checkID(newVal)
             }
         },

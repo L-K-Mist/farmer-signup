@@ -1,14 +1,8 @@
 <template>
   <v-layout row justify-center>
-    <v-flex v-if="name !== null" xs12 sm8 lg6 xl6>
-      <!-- <template v-if="me.name !== ''">
-        <div v-if="$apollo.loading">Loading...</div>
-        <div v-else>Hi {{ me.name }}, please share a bit more about yourself for us...</div>
-      </template>   -->
-      <!-- <v-btn color="success" @click="$store.dispatch('fetchMe')">text</v-btn> -->
+    <v-flex v-if="name !== null" xs12 sm8 lg4 xl4>
       <br>
-      <v-card v-show="true">
-
+      <v-card v-show="draftDone">
         <v-card-text xs12>
           <strong>Check your work</strong>  This draft is saved locally on your machine. When you're ready to share it online, click 
           "SEND"
@@ -20,21 +14,20 @@
         <v-card-title primary-title>
           <h2>Farmer Profile</h2>
         </v-card-title>
-        <v-stepper-step :editable="stepsEditable" :complete="gotPersonalDetails" step="1">
+        <v-stepper-step :editable="stepsEditable" :complete="personalDetails 
+        !== null" step="1">
           Who You Are
           <small>So {{ name }}, tell us a bit about yourself</small>
         </v-stepper-step>
         <v-stepper-content step="1">
           <personal-details></personal-details>
         </v-stepper-content>
-    
-        <v-stepper-step :editable="stepsEditable" :complete="gotAddress 
+        <v-stepper-step :editable="stepsEditable" :complete="address 
         !== null" step="2">Where You Are</v-stepper-step>
         <v-stepper-content step="2">
           <address-details></address-details> 
         </v-stepper-content>
-    
-        <v-stepper-step :editable="stepsEditable" :complete="gotActivities 
+        <v-stepper-step :editable="stepsEditable" :complete="farmingActivities 
         !== null" step="3">What You Do</v-stepper-step> 
         <v-stepper-content step="3">
           <farming-activities></farming-activities>
@@ -60,11 +53,7 @@ export default {
   },
   data() {
     return {
-      stepsEditable: false,
-      gotPersonalDetails: false,
-      gotAddress: false,
-      gotActivities: false
-
+      stepsEditable: false
       // me: "",
     };
   },
@@ -78,18 +67,19 @@ export default {
       }
     },
     name() {
-      return 'Dylan'
-      // if (this.$store.getters.me === null) {
-      //   return null;
-      // } else {
-      //   return this.$store.getters.me.nm; // TODO change to new deconstructed me object in AppState
-      // }
-    },
-    stepperData() {
-      return this.$store.getters.stepperData;
+      return this.$store.getters.authUser.first_name
     },
     draftDone() {
       return this.$store.getters.draftDone;
+    },
+    personalDetails() {
+      return this.$store.getters.personalDetails
+    },
+    address() {
+      return this.$store.getters.address
+    },
+    farmingActivities() {
+      return this.$store.getters.farmingActivities
     }
   },
   methods: {

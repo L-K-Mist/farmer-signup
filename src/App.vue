@@ -49,7 +49,7 @@
       <v-toolbar-title class="ml-1">Farmer App</v-toolbar-title>
       <v-spacer></v-spacer>
 
-      <transition 
+      <!-- <transition 
         class="elevation-24"
           enter-active-class="delay animated rollIn"
           leave-active-class="animated hinge slow"
@@ -62,7 +62,7 @@
                                
                             </v-avatar>
 
-      </transition>
+      </transition> -->
       <v-icon medium hint="logout" @click="logoff">fa-sign-out</v-icon>
     </v-toolbar>
     <v-content>

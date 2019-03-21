@@ -61,9 +61,9 @@ export default {
   },
   methods: {
     submit() {
-      this.$store.dispatch("farmingActivities", this.farmingActivities);
+      this.$store.commit("farmingActivities", this.farmingActivities);
       this.$store.dispatch("changeElement", 4);
-      this.$store.dispatch("draftDone", true);
+      this.$store.commit("draftDone", true);
     }
   }
 };

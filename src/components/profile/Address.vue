@@ -44,7 +44,9 @@ import db from "@/api/pouchDB";
 
 export default {
   mounted() {
-
+    if(this.storedAddress){
+      this.address = this.storedAddress
+    }
   },
   data: () => ({
     address: {
@@ -70,38 +72,17 @@ export default {
   }),
   computed: {
     storedAddress() {
-
+      this.$store.getters.address
     }
   },
   methods: {
     submit() {
-
+      this.$store.commit('address', this.address)
     }
-
   },
   watch: {
 
   }
 };
-    // submit() {
-    //   this.$apollo
-    //     .mutate({
-    //       mutation: ADDRESS_MUTATION,
-    //       variables: {
-    //         line1: this.address.line1,
-    //         line2: this.address.line2,
-    //         line3: this.address.line3,
-    //         area: this.address.area,
-    //         postalCode: this.address.postalCode,
-    //         province: this.address.province
-    //       }
-    //     })
-    //     .then(response => {
-    //       console.log("​login -> response.data", response.data);
-    //     })
-    //     .catch(error => console.error(error));
-    // },
-    // clear() {
-    //   this.$refs.form.reset();
-    // }
+
 </script>

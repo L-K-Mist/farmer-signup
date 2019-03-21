@@ -20,10 +20,11 @@ const state = {
     idToken: null,
     accessToken: null,
     tokensExpiry: null,
-    isHasuraAuth: null,
+    isHasuraAuth: false,
     isLoggedIn: false,
     authUser: null,
     newRoute: null,
+    person: {}
 }
 
 const getters = {
@@ -104,6 +105,7 @@ const actions = {
                     }
                 })
                 console.log('TCL: HasuraauthorizeUser -> response user', response.data);
+                state.isHasuraAuth = true
                 return response
             } catch (err) {
                 console.log(err)
@@ -120,7 +122,7 @@ const actions = {
             console.log("​update_auth_user -> authResult", authResult)
             if (authResult.accessToken && authResult.idToken) {
                 commit('update_auth_tokens', authResult)
-                commit('person', authResult.idTokenPayload)
+                // commit('person', authResult.idTokenPayload)
                 dispatch("hasuraAuth");
                 return authResult
             } else if (err) {

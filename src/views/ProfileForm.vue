@@ -10,7 +10,7 @@ import ProfileContainer from "@/components/profile/Container";
 export default {
   computed: {
     ready() {
-      return true;
+      return this.$store.getters.isHasuraAuth;
     }
   },
   components: {

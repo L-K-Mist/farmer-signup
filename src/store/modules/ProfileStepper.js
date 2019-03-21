@@ -1,3 +1,7 @@
+// import {
+//     UPDATE_USER
+// } from '@/gql/mutations.js'
+
 const state = {
     personalDetails: null,
     address: null,
@@ -16,20 +20,31 @@ const getters = {
     draftDone: state => state.draftDone,
 }
 
-const actions = {
+const mutations = {
+    personalDetails(state, payload) {
+        state.personalDetails = payload
+    },
+    address(state, payload) {
+        state.address = payload
+    },
+    farmingActivities(state, payload) {
+        state.farmingActivities = payload
+    },
+    draftDone(state, payload) {
+        state.draftDone = payload
+    },
+}
 
+const actions = {
     async sendProfile({
         state
-    }) {},
+    }) {
 
-    draftDone({
-        state
-    }, bool) {
-        state.draftDone = bool
-        console.log('TCL: ---------------------------------------');
-        console.log('TCL: state.draftDone', state.draftDone);
-        console.log('TCL: ---------------------------------------');
+        // TODO Here send to Hasura.  
+        // TODO make stepper editable
     },
+
+
 
     changeElement({
         state
@@ -65,5 +80,6 @@ const actions = {
 export default {
     state,
     getters,
+    mutations,
     actions
 }

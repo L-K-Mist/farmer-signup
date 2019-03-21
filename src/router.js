@@ -23,7 +23,6 @@ const router = new Router({
       name: "callback",
       component: Callback
     },
-
     {
       path: '/login',
       name: 'login',
@@ -52,7 +51,8 @@ const router = new Router({
       meta: {
         requiresAuth: true
       },
-    }, {
+    },
+    {
       path: '/products',
       name: 'ProductCapture',
       component: ProductCapture,
@@ -72,7 +72,6 @@ router.beforeEach((to, from, next) => {
   const routerToName = to.name
 
   if (to.name === 'callback' || to.name === 'login') { // check if "to"-route is "callback" or login and allow access
-
     console.log("Router is allowing callback or login")
     next()
   } else if (to.matched.some(record => record.meta.requiresAuth)) { // if this route requires auth
