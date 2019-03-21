@@ -60,7 +60,7 @@ import vuetifyCloudinaryUpload from "vuetify-cloudinary-upload";
 import srcForCloudinary from "@/helpers/srcForCloudinary.js";
 export default {
   created() {
-    this.fetchProducts()
+    // this.fetchProducts()
   },
   data() {
     return {
@@ -99,9 +99,9 @@ export default {
       this.$router.push('/')
     },
     async fetchProducts() {
-      const message = await this.$store.dispatch('fetchProducts')
-      console.log('TCL: testFunc -> message', message)
-      this.products = message
+      // const message = await this.$store.dispatch('fetchProducts')
+      // console.log('TCL: testFunc -> message', message)
+      // this.products = message
     }
   },
   components: { "v-cloudinary-upload": vuetifyCloudinaryUpload }

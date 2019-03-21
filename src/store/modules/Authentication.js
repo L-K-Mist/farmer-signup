@@ -20,18 +20,9 @@ const state = {
     idToken: null,
     accessToken: null,
     tokensExpiry: null,
-    prismaToken: null,
-    isPrismaAuth: null,
+    isHasuraAuth: null,
     isLoggedIn: false,
     authUser: null,
-    person: {
-        loginDataReceived: false,
-        role: "user",
-        firstName: null,
-        image: null,
-        lastName: null,
-        bio: null
-    },
 }
 
 const getters = {
@@ -39,7 +30,7 @@ const getters = {
     accessToken: state => state.accessToken,
     idToken: state => state.idToken,
     isLoggedIn: state => state.isLoggedIn,
-    isPrismaAuth: state => state.isPrismaAuth,
+    isHasuraAuth: state => state.isHasuraAuth,
     prismaToken: state => state.prismaToken,
     authUser: state => state.authUser,
     person: state => state.person
@@ -62,11 +53,7 @@ const mutations = {
             state.isLoggedIn = false
         }
     },
-    prismaToken(state, token) {
-        state.isPrismaAuth = token ? true : false
-        console.log("​prismaToken ->  state.isPrismaAuth", state.isPrismaAuth)
-        state.prismaToken = token
-    },
+
 
     isLoggedIn(state, bool) {
         state.isLoggedIn = bool
@@ -89,26 +76,7 @@ const actions = {
     }, payload) {
         commit("update_auth_tokens", payload)
     },
-    async testHasura({
-        state
-    }) {
-        try {
-            const response = await apollo.query({
-                query: gql `
-                    {
-                        flowers {
-                            id
-                            name
-                        }
-                    }
-                    `
-            })
-            console.log(response)
-        } catch (err) {
-            console.log('TCL: }catch -> err', err)
 
-        }
-    },
 
     async hasuraAuth({
         state,
@@ -128,9 +96,7 @@ const actions = {
                         auth0_id: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
                     }
                 })
-                // console.log('TCL: asyncauthorizeUser -> response', response.data.authorize.token);
                 console.log('TCL: HasuraauthorizeUser -> response user', response.data.insert_Users);
-                //commit('prismaToken', response.data.authorize.token)
                 return response
             } catch (err) {
                 console.log(err)
