@@ -16,8 +16,6 @@ export default {
   },
   async mounted() {
     let hashValue = this.$route.hash;
-    console.log(hashValue)
-    alert('copy test hash')
     if (!hashValue) {
       this.$router.push("/login"); //after valid login the #token comes back as a hash value no token means user didnt just login
     } else {

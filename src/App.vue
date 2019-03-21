@@ -121,7 +121,7 @@ export default {
     isLoggedIn(newVal) {
       if (newVal) {
         this.$nextTick(async () => {
-          await this.$store.dispatch("prismaAuth");
+          await this.$store.dispatch("hasuraAuth");
         });
       }
     },

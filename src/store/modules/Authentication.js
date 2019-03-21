@@ -40,9 +40,7 @@ const mutations = {
     update_auth_tokens(state, tokenData) {
         console.log("​update_auth_tokens -> tokenData", tokenData)
         state.accessToken = tokenData.accessToken || tokenData.access_token
-        console.log("​update_auth_tokens -> state.accessToken", state.accessToken)
         state.idToken = tokenData.idToken || tokenData.id_token
-        console.log("​update_auth_tokens -> state.idToken ", state.idToken)
         const tokensExpiry = addSeconds(new Date(), tokenData.expiresIn || tokenData.expires_in);
         state.tokensExpiry = tokensExpiry;
         state.authUser = tokenData.idTokenPayload
@@ -91,9 +89,11 @@ const actions = {
                 const response = await apollo.mutate({
                     mutation: AUTHORIZE,
                     variables: {
-                        email: state.authUser.email,
-                        first_name: state.authUser.given_name,
-                        auth0_id: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
+                        objects: [{
+                            first_name: state.authUser.given_name,
+                            auth0_id: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
+                            email: state.authUser.email,
+                        }]
                     }
                 })
                 console.log('TCL: HasuraauthorizeUser -> response user', response.data.insert_Users);
