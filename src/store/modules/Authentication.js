@@ -93,10 +93,12 @@ const actions = {
                             first_name: state.authUser.given_name,
                             auth0_id: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
                             email: state.authUser.email,
-                        }]
+                        }],
+                        now: new Date(),
+                        user: state.authUser["https://hasura.io/jwt/claims"]["x-hasura-user-id"],
                     }
                 })
-                console.log('TCL: HasuraauthorizeUser -> response user', response.data.insert_Users);
+                console.log('TCL: HasuraauthorizeUser -> response user', response.data);
                 return response
             } catch (err) {
                 console.log(err)
