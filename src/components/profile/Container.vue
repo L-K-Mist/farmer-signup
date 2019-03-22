@@ -50,6 +50,9 @@ export default {
     console.log("TCL: ----------------------------------------");
     console.log("TCL: mounted -> stepperData", stepperData);
     console.log("TCL: ----------------------------------------");
+    if (this.personalDetails && this.farmingActivities && this.address){
+      this.stepsEditable = true
+    }
   },
   data() {
     return {

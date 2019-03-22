@@ -1,6 +1,8 @@
-// import {
-//     UPDATE_USER
-// } from '@/gql/mutations.js'
+import apollo from '@/apollo'
+
+import {
+    UPDATE_USER
+} from '@/gql/mutations.js'
 
 const state = {
     personalDetails: null,
@@ -37,9 +39,46 @@ const mutations = {
 
 const actions = {
     async sendProfile({
-        state
+        state,
+        rootState
     }) {
+        console.log(rootState.Authentication.authUser)
+        try {
+            const response = await apollo.mutate({
+                mutation: UPDATE_USER,
+                variables: {
+                    address: [{
+                        area: state.address.area,
+                        line_1: state.address.line1,
+                        line_2: state.address.line2,
+                        line_3: state.address.line3,
+                        postal_code: state.address.postalCode,
+                        province: state.address.province,
+                        id: "google-oauth2|108754556378795682719"
+                    }],
+                    user_deets: [{
+                        first_name: state.personalDetails.firstName,
+                        last_name: state.personalDetails.firstName,
+                        cell: state.personalDetails.firstName,
+                        landline: state.personalDetails.firstName,
+                        email: state.personalDetails.firstName,
+                        sa_identity: state.personalDetails.firstName,
+                        auth0_id: "google-oauth2|108754556378795682719"
+                    }],
+                    activities: [{
+                        scale: state.farmingActivities.category,
+                        cultivation_approach: state.farmingActivities.cultivationApproach,
+                        selling_what: `[${state.farmingActivities.selling}]`,
+                        details: state.farmingActivities.shortDescription,
+                        id: "google-oauth2|108754556378795682719"
+                    }]
+                }
+            })
+            console.log("TCL: response", response)
 
+        } catch (error) {
+
+        }
         // TODO Here send to Hasura.  
         // TODO make stepper editable
     },
@@ -52,28 +91,8 @@ const actions = {
         state.element = payload
     },
 
-    personalDetails({
-        state
-    }, payload) {
 
-    },
 
-    address({
-        state
-    }, payload) {
-        var docName = "address"
-        upsertToPouch(docName, payload)
-    },
-
-    async farmingActivities({
-        state
-    }, payload) {},
-
-    async fetchMe({
-        state
-    }) {
-
-    },
 
 }
 

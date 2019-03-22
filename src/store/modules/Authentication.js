@@ -17,6 +17,7 @@ import {
 // Based on: https://itnext.io/managing-and-refreshing-auth0-tokens-in-a-vuejs-application-65eb29c309bc
 
 const state = {
+    userId: null,
     idToken: null,
     accessToken: null,
     tokensExpiry: null,
@@ -46,7 +47,7 @@ const mutations = {
         state.idToken = tokenData.idToken || tokenData.id_token
         const tokensExpiry = addSeconds(new Date(), tokenData.expiresIn || tokenData.expires_in);
         state.tokensExpiry = tokensExpiry;
-        state.authUser = tokenData.idTokenPayload
+        state.authUser = tokenData.idTokenPayload || t
         console.log("​update_auth_tokens -> state.authUser", state.authUser)
         if (state.accessToken) {
             state.isLoggedIn = true

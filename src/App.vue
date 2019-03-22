@@ -140,22 +140,7 @@ export default {
     testFunc() {
       console.log("​testFunc -> testFunc");
       // this.$store.dispatch('testHasura')
-      auth0.checkSession({
-            // responseType: "token id_token"
-        }, function (err, authResult) {
-            console.log("​checkSession's authResult", authResult)
-
-            // if (err) {
-            //     store.dispatch("isLoggedIn", false)
-            //     // router.push("/login");
-            // }
-            // store.commit("update_auth_tokens", authResult);
-            // const tokenExpiryDate = addSeconds(new Date(), authResult.expiresIn);
-            // const tenMinutesBeforeExpiry = subtractMinutes(tokenExpiryDate, 10);
-            // const now = new Date();
-            // refreshTimeout = setTimeout(refreshTokens, differenceInMilliSeconds(tenMinutesBeforeExpiry, now));
-            resolve();
-        });
+      this.$store.dispatch('sendProfile')
     }
   }
 };

@@ -15,9 +15,12 @@
     ></v-autocomplete>
     <br>
     <p>What kind of things do you do? That is: What would you want to sell via our network?</p>        
-    <v-checkbox label="I grow crops" v-model="farmingActivities.selling.crops"></v-checkbox>
-    <v-checkbox label="I raise livestock" v-model="farmingActivities.selling.livestock"></v-checkbox>
-    <v-checkbox label="I value-add and have crafts or products to sell" v-model="farmingActivities.selling.products"></v-checkbox>
+    <v-checkbox label="I grow crops" 
+      v-model="farmingActivities.selling" value="crops"></v-checkbox>
+    <v-checkbox label="I raise livestock" 
+      v-model="farmingActivities.selling" value="livestock"></v-checkbox>
+    <v-checkbox label="I value-add and have crafts or products to sell" 
+      v-model="farmingActivities.selling" value="products"></v-checkbox>
     <v-textarea
         v-model="farmingActivities.shortDescription"
         label="Care to go into more detail?"
@@ -51,11 +54,7 @@ export default {
         category: "",
         shortDescription: "",
         cultivationApproach: "",
-        selling: {
-          crops: true,
-          livestock: false,
-          products: false
-        }
+        selling: ['crops']
       }
     };
   },

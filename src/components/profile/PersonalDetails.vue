@@ -2,6 +2,11 @@
     <v-card>
         <v-card-text>
             <v-text-field
+                label="First Name"
+                v-model="person.firstName"
+                required
+            ></v-text-field>
+            <v-text-field
                 label="Last Name"
                 v-model="person.lastName"
                 required
@@ -56,6 +61,7 @@ export default {
         if(this.$store.getters.personalDetails){
             this.person = this.$store.getters.personalDetails
         } else if(this.$store.getters.authUser !== null) {
+            this.person.firstName = this.$store.getters.authUser.first_name
             this.person.lastName = this.$store.getters.authUser.family_name
         }
 
