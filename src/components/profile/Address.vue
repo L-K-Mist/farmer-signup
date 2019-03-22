@@ -44,6 +44,8 @@ import db from "@/api/pouchDB";
 
 export default {
   mounted() {
+    
+			console.log("TCL: mounted -> this.storedAddress", this.storedAddress)
     if(this.storedAddress){
       this.address = this.storedAddress
     }
@@ -72,7 +74,7 @@ export default {
   }),
   computed: {
     storedAddress() {
-      this.$store.getters.address
+      return this.$store.getters.address
     }
   },
   methods: {

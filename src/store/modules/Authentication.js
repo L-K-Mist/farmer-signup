@@ -11,7 +11,7 @@ import {
 // https://hasura-auth-farmer.herokuapp.com/console/data/schema/public/tables/flowers/insert
 
 
-
+//youradminsecretkey
 
 
 // Based on: https://itnext.io/managing-and-refreshing-auth0-tokens-in-a-vuejs-application-65eb29c309bc
@@ -47,7 +47,7 @@ const mutations = {
         state.idToken = tokenData.idToken || tokenData.id_token
         const tokensExpiry = addSeconds(new Date(), tokenData.expiresIn || tokenData.expires_in);
         state.tokensExpiry = tokensExpiry;
-        state.authUser = tokenData.idTokenPayload || t
+        state.authUser = tokenData.idTokenPayload
         console.log("​update_auth_tokens -> state.authUser", state.authUser)
         if (state.accessToken) {
             state.isLoggedIn = true

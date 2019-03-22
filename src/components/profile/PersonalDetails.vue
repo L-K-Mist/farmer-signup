@@ -1,6 +1,8 @@
 <template>
     <v-card>
         <v-card-text>
+            <v-parallax height="200" :src="person.picture"></v-parallax>
+            <br>
             <v-text-field
                 label="First Name"
                 v-model="person.firstName"
@@ -58,14 +60,17 @@ import { idDataExtraction } from '@/helpers/idDataExtraction'
 
 export default {
     mounted() {
+        console.log(this.$store.getters.authUser.picture)
+        this.person.picture = this.$store.getters.authUser.picture
         if(this.$store.getters.personalDetails){
-            this.person = this.$store.getters.personalDetails
+            this.person = Object.assign(this.person, this.$store.getters.personalDetails)
         } else if(this.$store.getters.authUser !== null) {
             this.person.firstName = this.$store.getters.authUser.first_name
             this.person.lastName = this.$store.getters.authUser.family_name
+            
         }
 
-		console.log('TCL: mounted -> this.$store.state.authUser', this.$store.state.authUser)
+		console.log('TCL: mounted -> this.$store.state.authUser', this.$store.getters.authUser)
 		console.log('TCL: mounted -> this.person', this.person)
     },
     data: () => ({
@@ -76,6 +81,7 @@ export default {
             cell: null,
             landLine: null,
             idSA: '',
+            picture: null
         }
     }),
     computed: {
