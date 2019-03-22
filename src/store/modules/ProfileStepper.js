@@ -41,7 +41,7 @@ const actions = {
     async sendProfile({
         state,
         rootState
-    }) {
+    }) { // TODO find out why picture_src is null
         console.log(rootState.Authentication.authUser)
         try {
             const response = await apollo.mutate({
@@ -64,12 +64,14 @@ const actions = {
                         email: state.personalDetails.firstName,
                         sa_identity: state.personalDetails.firstName,
                         picture: state.personalDetails.picture,
-                        auth0_id: "google-oauth2|108754556378795682719"
+                        auth0_id: "google-oauth2|108754556378795682719",
+                        address_id: "google-oauth2|108754556378795682719",
+                        activities_id: "google-oauth2|108754556378795682719"
                     }],
                     activities: [{
                         scale: state.farmingActivities.category,
                         cultivation_approach: state.farmingActivities.cultivationApproach,
-                        selling_what: state.farmingActivities.selling,
+                        selling_what: `[${state.farmingActivities.selling}]`,
                         details: state.farmingActivities.shortDescription,
                         id: "google-oauth2|108754556378795682719"
                     }]

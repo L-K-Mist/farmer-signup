@@ -40,7 +40,7 @@ mutation upsert_user_combo(
     objects: $user_deets,
     on_conflict: {
       constraint: Users_pkey,
-      update_columns: [first_name, email, cell, landline]
+      update_columns: [first_name, email, picture_src , cell, landline, address_id, activities_id]
     }
   ) {
     returning {
@@ -59,6 +59,7 @@ mutation upsert_user_combo(
       user {
         first_name
         auth0_id
+        picture_src
       }
     }
   }
