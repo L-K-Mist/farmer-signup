@@ -49,8 +49,13 @@
 import FarmMap from "@/components/profile/FarmMap";
 
 export default {
-  created() {
-    this.fetchFarm()
+  mounted() {
+    //this.fetchFarm()
+		console.log("TCL: mounted -> this.$store.getters.farmProfile", this.$store.getters.farmProfile)
+    var other = this.$store.state.FarmProfile
+		console.log("TCL: mounted -> other", other)
+    
+    this.farmProfile = this.$store.getters.farmProfile
   },
   data() {
     return {
@@ -106,8 +111,9 @@ export default {
       }
     },
     async saveFarmProfile() {
-      await this.$store.dispatch("saveFarmProfile", this.farmProfile);
-                  this.$router.push('/')
+      this.$store.commit('farmProfile', this.farmProfile)
+      // await this.$store.dispatch("saveFarmProfile", this.farmProfile);
+      this.$router.push('/')
     },
     async fetchFarm() {
       const response = await this.$store.dispatch('fetchMyFarm')

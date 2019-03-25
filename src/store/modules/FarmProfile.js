@@ -5,37 +5,46 @@ import {
 
 
 const state = {
+    farmProfile: {
+        name: null,
+        totalLand: "",
+        cultivatedLand: "",
+        gpsPoints: {
+            lat: null,
+            lng: null
+        },
+        farmersAssociations: "",
+        shareLocation: true
+    },
     farmLocation: null,
     showFarmMap: false,
     municipalData: {
         ward: null,
         province: null
     },
-    farmProfile: null
+
 }
 
 const getters = {
-    farmLocation(state) {
-        return state.farmLocation
-    },
-    showFarmMap(state) {
-        return state.showFarmMap
-    },
-    municipalData(state) {
-        return state.municipalData
-    },
-    farmProfile(state) {
-        return state.farmProfile
-    },
+    farmLocation: state => state.farmLocation,
+    showFarmMap: state => state.showFarmMap,
+    municipalData: state => state.municipalData,
+    farmProfile: state => state.farmProfile,
+}
+
+const mutations = {
+    farmProfile(state, payload) {
+        state.farmProfile = payload
+    }
 }
 
 const actions = {
-    farmProfile({
-        state
-    }, payload) {
-        state.farmProfile = payload
-        console.log('TCL: state.farmProfile', state.farmProfile);
-    },
+    // farmProfile({
+    //     state
+    // }, payload) {
+    //     state.farmProfile = payload
+    //     console.log('TCL: state.farmProfile', state.farmProfile);
+    // },
     setFarmLocation({
         state
     }, payload) {
@@ -73,5 +82,6 @@ const actions = {
 export default {
     state,
     getters,
+    mutations,
     actions
 }
