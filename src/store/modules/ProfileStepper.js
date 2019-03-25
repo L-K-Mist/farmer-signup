@@ -54,7 +54,7 @@ const actions = {
                         line_3: state.address.line3,
                         postal_code: state.address.postalCode,
                         province: state.address.province,
-                        id: "google-oauth2|108754556378795682719"
+                        id: rootState.Authentication.userId
                     }],
                     user_deets: [{
                         first_name: state.personalDetails.firstName,
@@ -64,16 +64,16 @@ const actions = {
                         email: state.personalDetails.firstName,
                         sa_identity: state.personalDetails.firstName,
                         picture: state.personalDetails.picture,
-                        auth0_id: "google-oauth2|108754556378795682719",
-                        address_id: "google-oauth2|108754556378795682719",
-                        activities_id: "google-oauth2|108754556378795682719"
+                        auth0_id: rootState.Authentication.userId,
+                        address_id: rootState.Authentication.userId,
+                        activities_id: rootState.Authentication.userId
                     }],
                     activities: [{
                         scale: state.farmingActivities.category,
                         cultivation_approach: state.farmingActivities.cultivationApproach,
                         selling_what: `[${state.farmingActivities.selling}]`,
                         details: state.farmingActivities.shortDescription,
-                        id: "google-oauth2|108754556378795682719"
+                        id: rootState.Authentication.userId
                     }]
                 }
             })

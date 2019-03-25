@@ -49,6 +49,9 @@ const mutations = {
         state.tokensExpiry = tokensExpiry;
         state.authUser = tokenData.idTokenPayload
         console.log("​update_auth_tokens -> state.authUser", state.authUser)
+        state.userId = state.authUser.sub || ''
+        console.log("TCL: update_auth_tokens -> state.userId", state.userId)
+
         if (state.accessToken) {
             state.isLoggedIn = true
         } else {

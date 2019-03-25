@@ -86,7 +86,7 @@ export default {
     getGPS() {
       var that = this;
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(position => { // TODO see if the that to this trick is now not needed because of ES6 style func 
           // Get the coordinates of the current possition.
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
