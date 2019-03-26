@@ -2,6 +2,11 @@ import {
     locationWardData,
     locationProvince
 } from "@/api/zaMapAxios";
+import apollo from '@/apollo'
+
+import {
+    UPDATE_FARM
+} from '@/gql/mutations.js'
 
 
 const state = {
@@ -65,10 +70,34 @@ const actions = {
         console.log('TCL: state.municipalData', state.municipalData);
         console.log('TCL: ---------------------------------------------');
     },
-    async saveFarmProfile({
+    async updateFarm({
         state,
         rootState
     }, payload) {
+        console.log("TCL: payload", payload)
+
+        try {
+            const response = await apollo.mutate({
+                mutation: UPDATE_FARM,
+                variables: {
+                    farm: [{
+                        name: payload.name,
+                        arable_land: payload.totalLand,
+                        cultivated_land: payload.cultivatedLand,
+                        location: payload.gpsPoints,
+                        share_location: payload.shareLocation,
+                        id: rootState.Authentication.userId,
+                        farmers_associations: payload.farmersAssociations
+                    }]
+                }
+            })
+            console.log("TCL: response", response)
+
+        } catch (error) {
+            console.log("TCL: error", error)
+
+        }
+
 
     },
     async fetchMyFarm({

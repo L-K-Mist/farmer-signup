@@ -112,6 +112,7 @@ export default {
     },
     async saveFarmProfile() {
       this.$store.commit('farmProfile', this.farmProfile)
+      this.$store.dispatch('updateFarm', this.farmProfile)
       // await this.$store.dispatch("saveFarmProfile", this.farmProfile);
       this.$router.push('/')
     },

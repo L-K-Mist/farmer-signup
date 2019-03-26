@@ -41,7 +41,7 @@
                     slot="activator"
                     v-model="crop.startDate"
                     label="End"
-                    prepend-icon="event"
+                    prepend-icon="fa-home"
                     readonly
                 ></v-text-field>
                 <v-date-picker v-model="crop.startDate" @input="$refs.startDate.save(crop.startDate)"></v-date-picker>

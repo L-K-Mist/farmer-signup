@@ -3,7 +3,6 @@ import {
     auth0
 } from "@/session.js";
 
-import gql from 'graphql-tag'
 import apollo from '@/apollo'
 import {
     AUTHORIZE
