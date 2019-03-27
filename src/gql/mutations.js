@@ -110,3 +110,25 @@ mutation upsert_farm($farm: [Farms_insert_input!] !) {
   }
 }
 `
+
+export const CREATE_CROP = gql `
+mutation create_Crop($crops: [Crops_insert_input!] !) {
+  insert_Crops(objects: $crops) {
+    affected_rows
+  }
+}
+`
+
+// example vars for CREATE_CROP
+/**
+{
+  "crops": [{
+    "category": "testCat",
+    "description": "this cat",
+    "start_date": "Text",
+    "end_date": "Text",
+    "name": "my crop",
+    "user_id": "google-oauth2|108754556378795682719"
+  }]
+}
+ */

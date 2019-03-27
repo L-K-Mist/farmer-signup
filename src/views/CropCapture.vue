@@ -41,7 +41,7 @@
                     slot="activator"
                     v-model="crop.startDate"
                     label="End"
-                    prepend-icon="fa-home"
+                    prepend-icon="fa-calendar"
                     readonly
                 ></v-text-field>
                 <v-date-picker v-model="crop.startDate" @input="$refs.startDate.save(crop.startDate)"></v-date-picker>
@@ -63,7 +63,7 @@
                     slot="activator"
                     v-model="crop.endDate"
                     label="Start"
-                    prepend-icon="event"
+                    prepend-icon="fa-calendar"
                     readonly
                 ></v-text-field>
                 <v-date-picker v-model="crop.endDate" @input="$refs.endDate.save(crop.endDate)"></v-date-picker>
@@ -94,23 +94,23 @@
 
 <script>
 export default {
-  beforeCreate() {
-    this.$store.dispatch("getCropNames");
-  },
-  mounted() {
+  async mounted() {
+    await this.$store.dispatch("getCropNames")
+    this.setSelection()
     this.$store.dispatch("fetchCrops");
   },
+
   data() {
     return {
       cropTypes: ["VEGETABLE", "HERB", "FRUIT"],
       cropNames: ["bean", "spinach", "carrot"],
-      crop: {
-        category: null,
-        name: null,
-        description: null,
-        startDate: null,
-        endDate: null
-      },
+      // crop: {
+      //   category: null,
+      //   name: null,
+      //   description: null,
+      //   startDate: null,
+      //   endDate: null
+      // },
       dateOne: false,
       dateTwo: false
     };
@@ -121,25 +121,23 @@ export default {
     },
     currentCrops() {
       return this.$store.getters.crops;
+    },
+    crop: {
+      get() {
+        return this.$store.getters.crop
+      },
+      set(val) {
+        this.$store.commit('crop', val)
+      }
     }
   },
   methods: {
-    setSelection() {
-      console.log("TCL: setSelection -> setSelection");
-
-      var options = this.vegOptions;
-      console.log("TCL: setSelection -> options", options);
-
-      var subset = options.filter(row => {
+    setSelection() { // modify the available options based on the previous selection
+      this.cropNames = this.vegOptions.filter(row => {
         return row.type === this.crop.category;
-      });
-      console.log("TCL: setSelection -> subset", subset);
-
-      var fieldMap = subset.map(function(row) {
+      }).map(function(row) {
         return row.name;
       });
-      console.log("TCL: setSelection -> fieldMap", fieldMap);
-      this.cropNames = fieldMap;
     },
     async saveCrop() {
       await this.$store.dispatch("saveCrop", this.crop);
