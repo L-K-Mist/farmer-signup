@@ -115,6 +115,7 @@ export default {
       dateTwo: false
     };
   },
+
   computed: {
     vegOptions() {
       return this.$store.getters.vegOptions;
@@ -131,6 +132,7 @@ export default {
       }
     }
   },
+  
   methods: {
     setSelection() { // modify the available options based on the previous selection
       this.cropNames = this.vegOptions.filter(row => {

@@ -29,7 +29,7 @@ export default {
       // TODO
     },
     async testFunc() {
-      alert("You fucking PRESSED It didn't you!!!")
+      alert("You frikken PRESSED It didn't you!!!")
     }
   },
   computed: {

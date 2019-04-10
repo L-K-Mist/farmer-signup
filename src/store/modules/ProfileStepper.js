@@ -63,7 +63,7 @@ const actions = {
                         landline: state.personalDetails.firstName,
                         email: state.personalDetails.firstName,
                         sa_identity: state.personalDetails.firstName,
-                        picture: state.personalDetails.picture,
+                        picture_src: state.personalDetails.picture,
                         auth0_id: rootState.Authentication.userId,
                         address_id: rootState.Authentication.userId,
                         activities_id: rootState.Authentication.userId

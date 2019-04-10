@@ -19,9 +19,9 @@ import store from '@/store/store.js'
 const httpLink = new HttpLink({
   // Here, we create a new instance of httpLink with the URL ( http://localhost:4000/) of our GraphQL server.
   // uri: 'https://mirage-advanced-frdudlwdkj.now.sh/'
-  // uri: process.env.VUE_APP_SERVERLINK
+  uri: process.env.VUE_APP_SERVERLINK
   // uri: "http://localhost:4000/"
-  uri: "https://hasura-auth-farmer.herokuapp.com/v1alpha1/graphql"
+  // uri: "https://hasura-auth-farmer.herokuapp.com/v1alpha1/graphql"
 });
 
 const errorLink = onError(

@@ -45,7 +45,7 @@
 </template> 
 
 <script>
-// TODO: Move to HelperFunctions
+// TODO: give masks for form particularly numbers only numbers
 import FarmMap from "@/components/profile/FarmMap";
 
 export default {

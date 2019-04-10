@@ -1,0 +1,533 @@
+- args:
+    functions: []
+    query_templates: []
+    remote_schemas: []
+    tables:
+    - array_relationships: []
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions: []
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns: []
+          filter: {}
+        role: user
+      table: author
+      update_permissions: []
+    - array_relationships: []
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - category
+          - name
+          - description
+          - user_id
+          - id
+          - start_date
+          - end_date
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: user_id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - category
+          - description
+          - end_date
+          - id
+          - name
+          - start_date
+          - user_id
+          filter: {}
+        role: user
+      table: Crops
+      update_permissions: []
+    - array_relationships: []
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions: []
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - spacing
+          - id
+          - name
+          - type
+          - plants_per_meter
+          filter: {}
+        role: user
+      table: _Produce
+      update_permissions: []
+    - array_relationships: []
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - start
+          - user_id
+          - id
+          set: {}
+        role: anon
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - start
+          - user_id
+          - id
+          set: {}
+        role: user
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - id
+          - start
+          - user_id
+          filter: {}
+        role: anon
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - id
+          - start
+          - user_id
+          filter: {}
+        role: user
+      table: Session
+      update_permissions: []
+    - array_relationships: []
+      delete_permissions:
+      - comment: null
+        permission:
+          filter: {}
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - name
+          - arable_land
+          - cultivated_land
+          - location
+          - id
+          - farmers_associations
+          - share_location
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - arable_land
+          - cultivated_land
+          - farmers_associations
+          - id
+          - location
+          - name
+          - share_location
+          filter: {}
+        role: user
+      table: Farms
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - arable_land
+          - cultivated_land
+          - farmers_associations
+          - id
+          - location
+          - name
+          - share_location
+          filter: {}
+          set: {}
+        role: user
+    - array_relationships:
+      - comment: null
+        name: crops
+        using:
+          foreign_key_constraint_on:
+            column: user_id
+            table: Crops
+      delete_permissions:
+      - comment: null
+        permission:
+          filter:
+            auth0_id:
+              _eq: X-Hasura-User-Id
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check:
+            auth0_id:
+              _eq: X-Hasura-User-Id
+          columns:
+          - first_name
+          - last_name
+          - cell
+          - sa_identity
+          - address_id
+          - auth0_id
+          - email
+          - picture_src
+          - activities_id
+          - last_login
+          - landline
+          - farm_id
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: address
+        using:
+          foreign_key_constraint_on: address_id
+      - comment: null
+        name: farmerActivities
+        using:
+          foreign_key_constraint_on: activities_id
+      - comment: null
+        name: farm
+        using:
+          manual_configuration:
+            column_mapping:
+              auth0_id: id
+            remote_table: Farms
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: true
+          columns:
+          - activities_id
+          - address_id
+          - auth0_id
+          - cell
+          - email
+          - farm_id
+          - first_name
+          - landline
+          - last_login
+          - last_name
+          - picture_src
+          - sa_identity
+          filter:
+            auth0_id:
+              _eq: X-Hasura-User-Id
+        role: user
+      table: Users
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - activities_id
+          - address_id
+          - auth0_id
+          - cell
+          - email
+          - farm_id
+          - first_name
+          - landline
+          - last_login
+          - last_name
+          - picture_src
+          - sa_identity
+          filter:
+            auth0_id:
+              _eq: X-Hasura-User-Id
+          set: {}
+        role: user
+    - array_relationships: []
+      delete_permissions:
+      - comment: null
+        permission:
+          filter: {}
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - name
+          - description
+          - unit
+          - stock_level
+          - price
+          - image_src
+          - image_name
+          - id
+          - user_id
+          set: {}
+        role: user
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - description
+          - id
+          - image_name
+          - image_src
+          - name
+          - price
+          - stock_level
+          - unit
+          - user_id
+          filter: {}
+        role: user
+      table: Products
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - description
+          - id
+          - image_name
+          - image_src
+          - name
+          - price
+          - stock_level
+          - unit
+          - user_id
+          filter: {}
+          set: {}
+        role: user
+    - array_relationships:
+      - comment: null
+        name: userssByaddressId
+        using:
+          foreign_key_constraint_on:
+            column: address_id
+            table: Users
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - area
+          - line_1
+          - line_2
+          - line_3
+          - postal_code
+          - id
+          - province
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - area
+          - id
+          - line_1
+          - line_2
+          - line_3
+          - postal_code
+          - province
+          filter: {}
+        role: user
+      table: Addresses
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - area
+          - id
+          - line_1
+          - line_2
+          - line_3
+          - postal_code
+          - province
+          filter: {}
+          set: {}
+        role: user
+    - array_relationships: []
+      delete_permissions:
+      - comment: null
+        permission:
+          filter: {}
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - id
+          - name
+          set: {}
+        role: anon
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - id
+          - name
+          set: {}
+        role: user
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - id
+          - name
+          filter: {}
+        role: user
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - id
+          - name
+          filter: {}
+        role: anon
+      table: flowers
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - id
+          - name
+          filter: {}
+          set: {}
+        role: user
+    - array_relationships:
+      - comment: null
+        name: userssByactivitiesId
+        using:
+          foreign_key_constraint_on:
+            column: activities_id
+            table: Users
+      delete_permissions: []
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - cultivation_approach
+          - details
+          - scale
+          - selling_what
+          - id
+          set: {}
+        role: user
+      object_relationships:
+      - comment: null
+        name: user
+        using:
+          foreign_key_constraint_on: id
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - cultivation_approach
+          - details
+          - id
+          - scale
+          - selling_what
+          filter: {}
+        role: user
+      table: FarmerActivities
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - cultivation_approach
+          - details
+          - id
+          - scale
+          - selling_what
+          filter: {}
+          set: {}
+        role: user
+    - array_relationships: []
+      delete_permissions:
+      - comment: null
+        permission:
+          filter: {}
+        role: user
+      event_triggers: []
+      insert_permissions:
+      - comment: null
+        permission:
+          check: {}
+          columns:
+          - name
+          - type
+          - spacing
+          - plants_per_meter
+          - id
+          set: {}
+        role: user
+      object_relationships: []
+      select_permissions:
+      - comment: null
+        permission:
+          allow_aggregations: false
+          columns:
+          - id
+          - name
+          - plants_per_meter
+          - spacing
+          - type
+          filter: {}
+        role: user
+      table: _Produce_Options
+      update_permissions:
+      - comment: null
+        permission:
+          columns:
+          - id
+          - name
+          - plants_per_meter
+          - spacing
+          - type
+          filter: {}
+          set: {}
+        role: user
+  type: replace_metadata

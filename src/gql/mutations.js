@@ -132,3 +132,29 @@ mutation create_Crop($crops: [Crops_insert_input!] !) {
   }]
 }
  */
+
+export const CREATE_PRODUCT = gql `
+mutation add_product($products: [Products_insert_input!] !) {
+  insert_Products(objects: $products) {
+    affected_rows
+    returning {
+      id
+    }
+  }
+}
+`
+
+// example vars for CREATE_PRODUCT
+/**
+{
+  "products": [{
+    "description": "Widget and Jam",
+    "image_src": "https://res.cloudinary.com/dylan-van-den-bosch/image/upload/w_auto,h_240,c_fill,g_auto,q_auto,f_auto/wzkcenxzx40b3btmxqkm",
+    "name": "Whatchoo-macallit",
+    "price": 67.78,
+    "stock_level": 34,
+    "unit": "dozen",
+    "user_id": "google-oauth2|108754556378795682719"
+  }]
+}
+ */

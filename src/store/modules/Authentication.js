@@ -10,7 +10,7 @@ import {
 // https://hasura-auth-farmer.herokuapp.com/console/data/schema/public/tables/flowers/insert
 
 
-//youradminsecretkey
+//  
 // google-oauth2|108754556378795682719
 
 // Based on: https://itnext.io/managing-and-refreshing-auth0-tokens-in-a-vuejs-application-65eb29c309bc

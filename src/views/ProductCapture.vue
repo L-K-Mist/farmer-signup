@@ -59,8 +59,23 @@
 import vuetifyCloudinaryUpload from "vuetify-cloudinary-upload";
 import srcForCloudinary from "@/helpers/srcForCloudinary.js";
 export default {
-  created() {
-    // this.fetchProducts()
+  mounted() {
+    // this.$store.commit('product', {
+    //     name: "Whatchoo-macallit",
+    //     description: "Widget and Jam",
+    //     unit: "dozenzz",
+    //     stockLevel: 34,
+    //     price: 67.78,
+    //     imageSrc: ""
+    // })
+    console.log("TCL: mounted -> this.$store.getters.product", this.$store.getters.product)
+   // this.$store.getters.farmProfile
+		console.log("TCL: mounted -> this.$store.getters.farmProfile", this.$store.getters.farmProfile)
+    this.product = this.$store.getters.product
+		console.log("TCL: created -> this.product", this.product)
+    this.$nextTick(() => {
+    console.log("TCL: mounted -> this.$store.getters.product", this.$store.getters.product)
+    });
   },
   data() {
     return {
@@ -104,7 +119,8 @@ export default {
       // this.products = message
     }
   },
-  components: { "v-cloudinary-upload": vuetifyCloudinaryUpload }
+  components: { 
+    "v-cloudinary-upload": vuetifyCloudinaryUpload }
 };
 </script>
 <style scoped>

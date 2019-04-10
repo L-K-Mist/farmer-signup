@@ -1,10 +1,22 @@
 import apollo from '@/apollo'
 import gql from 'graphql-tag'
+import {
+    CREATE_PRODUCT
+} from '@/gql/mutations.js'
+
 
 const state = {
-    product: null,
+    product: {
+        name: "Whatchoo-macallit",
+        description: "Widget and Jam",
+        unit: "dozen",
+        stockLevel: 34,
+        price: 67.78,
+        imageSrc: ""
+    },
     products: null
 }
+
 
 const getters = {
     product(state) {
@@ -15,88 +27,42 @@ const getters = {
     }
 }
 
+const mutations = {
+    product(state, payload) {
+        state.product = payload
+    }
+}
+
 const actions = {
     async saveProduct({
         rootState,
+        commit,
         state
     }, payload) {
-        console.log('TCL: payload', JSON.stringify(payload));
-        var farmState = rootState.AppState.docs.farm
+        console.log("TCL: payload", payload)
+        commit('product', payload)
         const response = await apollo.mutate({
-            mutation: gql `
-                mutation createProduct(
-                    $farmId: ID!
-                    $name: String!
-                    $description: String
-                    $unit: String
-                    $stockLevel: Float
-                    $price: Float
-                    $imageSrc: String
-                    $imageName: String
-                ) {
-                    createProduct(
-                        farmId: $farmId 
-                        name: $name 
-                        description: $description 
-                        unit: $unit 
-                        stockLevel: $stockLevel 
-                        price: $price
-                        imageSrc: $imageSrc
-                        imageName: $imageName
-        
-                    ) {
-                        id
-                        name
-                        description
-                        unit
-                        stockLevel
-                        price
-                        imageSrc
-                        imageName
-                        farm {
-                            id
-                        }
-                    }
-                }
-            `,
+            mutation: CREATE_PRODUCT,
             variables: {
-                farmId: farmState.id,
-                ...payload,
+                "products": [{
+                    "description": payload.description,
+                    "image_src": payload.imageSrc,
+                    "name": payload.name,
+                    "price": payload.price,
+                    "stock_level": payload.stockLevel,
+                    "unit": payload.unit,
+                    "user_id": rootState.Authentication.userId
 
+                }]
             }
         })
-        console.log('TCL: response', response);
+        console.log("TCL: response", response)
+
     },
     async fetchProducts({
         rootState,
         state
     }) {
-        var response = await apollo.query({
-            query: gql `
-                query currentProducts($farmId: ID!) {
-                    currentProducts(
-                        farmId: $farmId
-                    ) {
-                        id
-                        name
-                        description
-                        unit
-                        stockLevel
-                        price
-                        imageSrc
-                        imageName
-                    }
-                }
-            `,
-            variables: {
-                farmId: rootState.AppState.docs.farm.id,
-            }
-        })
-        var products = response.data.currentProducts
-        console.log('TCL: crops', products);
-
-        state.products = products
-        return products
 
     }
 }
@@ -104,5 +70,6 @@ const actions = {
 export default {
     state,
     getters,
+    mutations,
     actions
 }

@@ -44,7 +44,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar scroll-off-screen :scroll-threshold="50" color="indigo" dark fixed app style="z-index: 14">
+    <v-toolbar scroll-off-screen :scroll-threshold="50" color="primary" dark fixed app style="z-index: 14">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title class="ml-1">Farmer App</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -70,8 +70,8 @@
         <router-view/>
       </v-slide-y-transition>
     </v-content>
-    <v-footer color="indigo" absolute app>
-      <span class="white--text">&copy; 2018</span>
+    <v-footer color="primary" absolute app>
+      <span class="white--text">&copy; 2019</span>
     </v-footer>
   </v-app>
 </template>

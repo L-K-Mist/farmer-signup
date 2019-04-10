@@ -1,9 +1,9 @@
 import store from '@/store/store.js'
-import router from './router'
+// import router from './router'
 import isAfter from "date-fns/is_after";
 import subtractMinutes from "date-fns/sub_minutes";
 import addSeconds from "date-fns/add_seconds";
-import differenceInMinutes from "date-fns/difference_in_minutes";
+// import differenceInMinutes from "date-fns/difference_in_minutes";
 import differenceInMilliSeconds from "date-fns/difference_in_milliseconds";
 import {
     WebAuth
@@ -16,7 +16,7 @@ import apollo from '@/apollo'
 let refreshTimeout = null;
 const auth0 = new WebAuth({
     domain: "welink.au.auth0.com",
-    clientID: "0SIaIds4btTC6nLkYiOFkj5nJUg4GhJx",
+    clientID: "XZVPNELwKrxDAcH6DYf4QxQEUCjWhXgh",
     // make sure this line contains the port: 8080
     redirectUri: process.env.VUE_APP_ENV_CALLBACK,
     // we will use the api/v2/ to access the user information as payload

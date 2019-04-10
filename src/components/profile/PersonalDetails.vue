@@ -65,9 +65,8 @@ export default {
         if(this.$store.getters.personalDetails){
             this.person = Object.assign(this.person, this.$store.getters.personalDetails)
         } else if(this.$store.getters.authUser !== null) {
-            this.person.firstName = this.$store.getters.authUser.first_name
-            this.person.lastName = this.$store.getters.authUser.family_name
-            
+            this.person.firstName = this.$store.getters.authUser.first_name || ''
+            this.person.lastName = this.$store.getters.authUser.family_name || ''
         }
 
 		console.log('TCL: mounted -> this.$store.state.authUser', this.$store.getters.authUser)

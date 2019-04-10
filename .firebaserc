@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "market-mothership"
+    "default": "farmer-app",
+    "farmer": "farmer-app-724d4"
   }
 }

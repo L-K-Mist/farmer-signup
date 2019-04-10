@@ -1,0 +1,8 @@
+- args:
+    sql: CREATE TABLE "public"."JUST_TO_see"("testnew" text , "id" serial NOT NULL,
+      PRIMARY KEY ("id") );
+  type: run_sql
+- args:
+    name: JUST_TO_see
+    schema: public
+  type: add_existing_table_or_view
