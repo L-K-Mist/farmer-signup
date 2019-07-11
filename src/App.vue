@@ -1,11 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-    style="z-index: 15"
-      v-model="drawer"
-      fixed
-      app
-    >
+    <v-navigation-drawer style="z-index: 15" v-model="drawer" fixed app>
       <v-list dense>
         <v-list-tile to="/">
           <v-list-tile-action>
@@ -44,7 +39,15 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar scroll-off-screen :scroll-threshold="50" color="primary" dark fixed app style="z-index: 14">
+    <v-toolbar
+      scroll-off-screen
+      :scroll-threshold="50"
+      color="primary"
+      dark
+      fixed
+      app
+      style="z-index: 14"
+    >
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title class="ml-1">Farmer App</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -62,12 +65,12 @@
                                
                             </v-avatar>
 
-      </transition> -->
+      </transition>-->
       <v-icon medium hint="logout" @click="logoff">fa-sign-out</v-icon>
     </v-toolbar>
     <v-content>
       <v-slide-y-transition mode="out-in">
-        <router-view/>
+        <router-view />
       </v-slide-y-transition>
     </v-content>
     <v-footer color="primary" absolute app>
@@ -77,13 +80,10 @@
 </template>
 
 <script>
-
-
 import { logout, initSession, auth0 } from "@/session";
 
 export default {
-  created() {
-  },
+  created() {},
   mounted() {
     initSession().then(() => {
       if (this.isLoggedIn) {
@@ -91,7 +91,6 @@ export default {
         this.$store.dispatch("hasuraAuth");
       }
     }); //Initialize our session
-    
   },
   props: {
     source: String
@@ -110,8 +109,13 @@ export default {
     person() {
       return this.$store.getters.person;
     },
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
+    isLoggedIn: {
+      get() {
+        return this.$store.getters.isLoggedIn;
+      },
+      set(val) {
+        this.$store.dispatch("isLoggedIn", val);
+      }
     },
     breakpoint() {
       return this.$vuetify.breakpoint.name;
@@ -121,8 +125,10 @@ export default {
     isLoggedIn(newVal) {
       if (newVal) {
         this.$nextTick(async () => {
-          await this.$store.dispatch("hasuraAuth");
+          await this.$store.dispatch("hasuraAuth"); // Because vuex actions return a promise
         });
+      } else {
+        this.$store.commit("isHasuraAuth", false); // Because of Vuex persist, you can't rely on client returning to default state
       }
     },
     breakpoint(newVal) {
@@ -135,12 +141,14 @@ export default {
       this.$router.push("/my-stall");
     },
     logoff() {
+      this.isLoggedIn = false;
+      // this.$router.push({ name: "home" });
       logout();
     },
     testFunc() {
       console.log("​testFunc -> testFunc");
       // this.$store.dispatch('testHasura')
-      this.$store.dispatch('sendProfile')
+      this.$store.dispatch("sendProfile");
     }
   }
 };

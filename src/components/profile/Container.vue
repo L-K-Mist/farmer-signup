@@ -1,34 +1,46 @@
 <template>
   <v-layout row justify-center>
     <v-flex v-if="name !== null" xs12 sm8 lg4 xl4>
-      <br>
+      <br />
       <v-card v-show="draftDone">
         <v-card-text xs12>
-          <strong>Check your work</strong>  This draft is saved locally on your machine. When you're ready to share it online, click 
+          <strong>Check your work</strong> This draft is saved locally on your machine. When you're ready to share it online, click
           "SEND"
           <v-btn @click="sendOnline()" color="success">send</v-btn>
-        </v-card-text> 
+        </v-card-text>
       </v-card>
-      <br>
+      <br />
       <v-stepper :non-linear="stepsEditable" :value="el" vertical>
         <v-card-title primary-title>
           <h2>Farmer Profile</h2>
         </v-card-title>
-        <v-stepper-step :editable="stepsEditable" :complete="personalDetails 
-        !== null" step="1">
+        <v-stepper-step
+          :editable="stepsEditable"
+          :complete="personalDetails 
+        !== null"
+          step="1"
+        >
           Who You Are
           <small>So {{ name }}, tell us a bit about yourself</small>
         </v-stepper-step>
         <v-stepper-content step="1">
           <personal-details></personal-details>
         </v-stepper-content>
-        <v-stepper-step :editable="stepsEditable" :complete="address 
-        !== null" step="2">Where You Are</v-stepper-step>
+        <v-stepper-step
+          :editable="stepsEditable"
+          :complete="address 
+        !== null"
+          step="2"
+        >Where You Are</v-stepper-step>
         <v-stepper-content step="2">
-          <address-details></address-details> 
+          <address-details></address-details>
         </v-stepper-content>
-        <v-stepper-step :editable="stepsEditable" :complete="farmingActivities 
-        !== null" step="3">What You Do</v-stepper-step> 
+        <v-stepper-step
+          :editable="stepsEditable"
+          :complete="farmingActivities 
+        !== null"
+          step="3"
+        >What You Do</v-stepper-step>
         <v-stepper-content step="3">
           <farming-activities></farming-activities>
         </v-stepper-content>
@@ -50,8 +62,8 @@ export default {
     console.log("TCL: ----------------------------------------");
     console.log("TCL: mounted -> stepperData", stepperData);
     console.log("TCL: ----------------------------------------");
-    if (this.personalDetails && this.farmingActivities && this.address){
-      this.stepsEditable = true
+    if (this.personalDetails && this.farmingActivities && this.address) {
+      this.stepsEditable = true;
     }
   },
   data() {
@@ -70,19 +82,19 @@ export default {
       }
     },
     name() {
-      return this.$store.getters.authUser.first_name
+      return this.$store.getters.authUser.given_name;
     },
     draftDone() {
       return this.$store.getters.draftDone;
     },
     personalDetails() {
-      return this.$store.getters.personalDetails
+      return this.$store.getters.personalDetails;
     },
     address() {
-      return this.$store.getters.address
+      return this.$store.getters.address;
     },
     farmingActivities() {
-      return this.$store.getters.farmingActivities
+      return this.$store.getters.farmingActivities;
     }
   },
   methods: {
@@ -91,8 +103,8 @@ export default {
       console.log("TCL: sendOnline -> sendOnline");
       console.log("TCL: -----------------------------------------");
       await this.$store.dispatch("sendProfile");
-      console.log("after await dispatch sendProfile")
-      this.$router.push('/')
+      console.log("after await dispatch sendProfile");
+      this.$router.push("/");
     }
   },
   watch: {
