@@ -16,7 +16,7 @@
     "apollo-link-http": "^1.5.4",
     "apollo-utilities": "^1.0.25",
     "auth0-js": "^9.8.1",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "circular-json": "^0.5.9",
     "date-fns": "^1.29.0",
     "font-awesome": "^4.7.0",
